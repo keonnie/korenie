@@ -1,0 +1,9 @@
+control-checkbox-list {
+  --line-size: 1rem;
+
+  &.dw-form-controls {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+}

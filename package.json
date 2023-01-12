@@ -1,0 +1,49 @@
+{
+  "name": "@keonnie/korenie",
+  "version": "0.0.0",
+  "description": "Collection of designed HTML custom elements and controls for building web application in Vite and ensure unify layout.",
+  "type": "module",
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/korenie.umd.cjs",
+  "module": "./dist/korenie.js",
+  "exports": {
+    ".": {
+      "import": "./dist/korenie.js",
+      "require": "./dist/korenie.umd.cjs"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/keonnie/korenie.git"
+  },
+  "scripts": {
+    "coverage": "vitest run --coverage",
+    "build": "vite build",
+    "dev:test": "vitest",
+    "format": "yarn prettier:fix && yarn lint:fix",
+    "lint": "eslint \"**/*.js\"",
+    "lint:fix": "eslint . --fix",
+    "pre-commit": "yarn format && yarn coverage",
+    "prettier": "prettier -c .",
+    "prettier:fix": "prettier --write .",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@vitest/coverage-istanbul": "^0.27.1",
+    "eslint": "^8.31.0",
+    "eslint-config-prettier": "^8.6.0",
+    "happy-dom": "^8.1.1",
+    "inflected": "^2.1.0",
+    "postcss-nesting": "^10.2.0",
+    "prettier": "^2.8.2",
+    "urlpattern-polyfill": "^6.0.2",
+    "vite": "^4.0.0",
+    "vite-plugin-css-injected-by-js": "^2.3.1",
+    "vite-plugin-eslint": "^1.8.1",
+    "vitest": "^0.26.2",
+    "vitest-fetch-mock": "^0.2.1"
+  }
+}

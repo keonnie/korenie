@@ -1,0 +1,9 @@
+control-textarea {
+  & textarea {
+    resize: none;
+
+    /* Auto-grow */
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+}

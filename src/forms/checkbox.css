@@ -1,0 +1,22 @@
+.dw-form-controls input[type='checkbox'].dw-form-controls__principals {
+  display: inline;
+}
+
+control-checkbox {
+  &.dw-form-controls {
+    display: block;
+  }
+
+  & input[type='checkbox'],
+  & input[type='checkbox'] + label {
+    display: inline;
+    margin: 0.25rem;
+    vertical-align: middle;
+
+    height: var(--line-size, 1rem);
+    width: var(--line-size, 1rem);
+    font-size: var(--line-size, 1rem);
+
+    cursor: pointer;
+  }
+}

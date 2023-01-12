@@ -1,0 +1,37 @@
+.dw-form-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+
+  & label {
+    display: block;
+    line-height: 1.5em;
+    width: 100%;
+  }
+
+  & .descriptions {
+    color: var(--text-lighter, lightgrey);
+    font-style: italic;
+  }
+
+  & .dw-form-controls__principals {
+    display: block;
+
+    border: none;
+    border-bottom: 1px solid var(--brand-primary-color, blue);
+
+    line-height: 1.5em;
+    height: 1.8em;
+
+    outline: none;
+
+    &:hover {
+      border-color: var(--brand-secondary, purple);
+    }
+
+    &:focus {
+      border: none;
+      border-bottom: 1px solid var(--brand-primary-color, blue);
+    }
+  }
+}

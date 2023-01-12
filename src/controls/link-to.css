@@ -1,0 +1,12 @@
+link-to {
+  border: 1px solid var(--brand-primary-color, blue);
+  border-radius: 0.5em;
+  padding: 0.5em;
+  color: var(--brand-primary-color, blue);
+  cursor: pointer;
+
+  &:hover {
+    border-color: var(--brand-secondary-color, red);
+    color: var(--brand-secondary-color);
+  }
+}
