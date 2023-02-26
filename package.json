@@ -1,6 +1,6 @@
 {
   "name": "@keonnie/korenie",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Collection of designed HTML custom elements and controls for building web application in Vite and ensure unify layout.",
   "type": "module",
   "license": "MIT",
