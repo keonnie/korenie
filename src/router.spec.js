@@ -7,7 +7,15 @@ import {
   test,
   vi,
 } from 'vitest'
-import { BaseView, Router } from '.'
+
+vi.mock('./helpers', () => {
+  return {
+    registerControl: vi.fn(),
+  }
+})
+
+const { registerControl } = await import('./helpers')
+const { BaseView, Router } = await import('.')
 
 class ProductView extends BaseView {}
 
@@ -97,19 +105,9 @@ describe('Unit | Router', () => {
       Router.route('/products/:type/new', ProductView)
     })
 
-    beforeEach(async () => {
-      vi.mock('./helpers', () => {
-        return {
-          registerControl: vi.fn(),
-        }
-      })
-
-      const { registerControl } = await import('./helpers')
-      this.mockRegisterControl = registerControl
-    })
-
-    afterEach(() => {
-      vi.resetAllMocks()
+    beforeEach(() => {
+      // Clear calls made by `Router.route`
+      registerControl.mockClear()
     })
 
     test('get current view tag without any attributes', () => {
@@ -126,7 +124,7 @@ describe('Unit | Router', () => {
 
     test('register custom tag', () => {
       Router.viewer.tag
-      expect(this.mockRegisterControl).toHaveBeenCalledTimes(1)
+      expect(registerControl).toHaveBeenCalledTimes(1)
     })
 
     test('get route with index.html', () => {
