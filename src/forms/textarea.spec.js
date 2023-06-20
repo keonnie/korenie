@@ -1,13 +1,13 @@
-import { describe, expect, test } from 'vitest'
+import { describe, expect, it } from 'vitest'
 
 import { FormBaseControl, TextareaControl } from '..'
 
 describe('Unit | Controls | Textarea', () => {
-  test('is instance of FormBaseControl', () => {
+  it('is instance of FormBaseControl', () => {
     expect(new TextareaControl()).toBeInstanceOf(FormBaseControl)
   })
 
-  test('render textarea', () => {
+  it('render textarea', () => {
     let dataset = {
       id: 'myid',
       name: 'myid',
@@ -24,7 +24,7 @@ describe('Unit | Controls | Textarea', () => {
     expect(textarea.name).toBe(dataset.name)
   })
 
-  test('define placeholder when provided', () => {
+  it('define placeholder when provided', () => {
     let dataset = {
       placeholder: 'describe action to do',
     }
@@ -39,7 +39,7 @@ describe('Unit | Controls | Textarea', () => {
     expect(textarea.placeholder).toBe(dataset.placeholder)
   })
 
-  test('blank placeholder if not provided', () => {
+  it('blank placeholder if not provided', () => {
     let control = new TextareaControl()
 
     control.connectedCallback()
@@ -49,7 +49,7 @@ describe('Unit | Controls | Textarea', () => {
     expect(textarea.placeholder).not.toBe('undefined')
   })
 
-  test('inherit from dataset except attribute', () => {
+  it('inherit from dataset except attribute', () => {
     let control = new TextareaControl()
     control.dataset.name = 'formname'
     control.dataset.id = 'myid'
@@ -70,7 +70,7 @@ describe('Unit | Controls | Textarea', () => {
   })
 
   describe('when text input', () => {
-    test('resize height', () => {
+    it('resize height', () => {
       let control = new TextareaControl()
       control.dataset.name = 'formname'
       control.dataset.id = 'myid'

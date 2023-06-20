@@ -1,13 +1,13 @@
-import { describe, test, expect } from 'vitest'
+import { describe, it, expect } from 'vitest'
 
 import { FormBaseControl, PasswordControl } from '..'
 
 describe('Unit | Controls | Password', () => {
-  test('is instance of BaseControl', () => {
+  it('is instance of BaseControl', () => {
     expect(new PasswordControl()).toBeInstanceOf(FormBaseControl)
   })
 
-  test('render input password', () => {
+  it('render input password', () => {
     let dataset = {
       id: 'myid',
       name: 'myemail',
@@ -24,7 +24,7 @@ describe('Unit | Controls | Password', () => {
     expect(passwordbox.name).toBe(dataset.name)
   })
 
-  test('make field required if specified', () => {
+  it('make field required if specified', () => {
     let control = new PasswordControl()
     control.dataset.required = 'true'
 
@@ -34,7 +34,7 @@ describe('Unit | Controls | Password', () => {
     expect(passwordbox.required).toBe(true)
   })
 
-  test('define placeholder when provided', () => {
+  it('define placeholder when provided', () => {
     let dataset = {
       placeholder: 'describe action to do',
     }
@@ -49,7 +49,7 @@ describe('Unit | Controls | Password', () => {
     expect(passwordbox.placeholder).toBe(dataset.placeholder)
   })
 
-  test('blank placeholder if not provided', () => {
+  it('blank placeholder if not provided', () => {
     let control = new PasswordControl()
 
     control.connectedCallback()
@@ -59,7 +59,7 @@ describe('Unit | Controls | Password', () => {
     expect(passwordbox.placeholder).not.toBe('undefined')
   })
 
-  test('inherit from dataset except attribute', () => {
+  it('inherit from dataset except attribute', () => {
     let control = new PasswordControl()
     control.dataset.name = 'formname'
     control.dataset.id = 'myid'
@@ -79,7 +79,7 @@ describe('Unit | Controls | Password', () => {
     expect(passwordbox.dataset.custom).toBe(control.dataset.custom)
   })
 
-  test('auto-complete always off', () => {
+  it('auto-complete always off', () => {
     let control = new PasswordControl()
     control.connectedCallback()
     let passwordfield = control.querySelector('input[type="password"]')

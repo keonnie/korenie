@@ -1,24 +1,24 @@
-import { describe, expect, test, vi } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 
 import { BaseControl } from '..'
 import { FormBaseControl } from '.'
 
 describe('Unit | Controls | Forms | Base', () => {
-  test('track property change for onPopulate', () => {
+  it('track property change for onPopulate', () => {
     expect(FormBaseControl.observedAttributes).toContain('onPopulate')
   })
 
-  test('is an instance of BaseControl', () => {
+  it('is an instance of BaseControl', () => {
     expect(new FormBaseControl()).toBeInstanceOf(BaseControl)
   })
 
-  test('include base control class name', () => {
+  it('include base control class name', () => {
     let control = new FormBaseControl()
     control.connectedCallback()
     expect(control.className).toContain('dw-form-controls')
   })
 
-  test('display label', () => {
+  it('display label', () => {
     let control = new FormBaseControl()
     control.dataset.label = 'My label'
 
@@ -28,7 +28,7 @@ describe('Unit | Controls | Forms | Base', () => {
     expect(control.querySelector('label').textContent).toBe('My label')
   })
 
-  test('omit label if not provided', () => {
+  it('omit label if not provided', () => {
     let control = new FormBaseControl()
 
     control.connectedCallback()
@@ -36,7 +36,7 @@ describe('Unit | Controls | Forms | Base', () => {
     expect(control.querySelector('label')).toBe(null)
   })
 
-  test('define the attribute `for`', () => {
+  it('define the attribute `for`', () => {
     let control = new FormBaseControl()
     control.dataset.label = 'My label'
 
@@ -45,7 +45,7 @@ describe('Unit | Controls | Forms | Base', () => {
     expect(control.querySelector('label').htmlFor).not.toBeUndefined()
   })
 
-  test('use dataset name if id not provided', () => {
+  it('use dataset name if id not provided', () => {
     let dataset = { name: 'el-name' }
     let control = new FormBaseControl()
     Object.assign(control.dataset, dataset)
@@ -55,7 +55,7 @@ describe('Unit | Controls | Forms | Base', () => {
     expect(control.dataset.id).toBe(dataset.name)
   })
 
-  test('use dataset id if name not provided', () => {
+  it('use dataset id if name not provided', () => {
     let dataset = { id: 'el-id' }
     let control = new FormBaseControl()
     Object.assign(control.dataset, dataset)
@@ -65,21 +65,21 @@ describe('Unit | Controls | Forms | Base', () => {
     expect(control.dataset.name).toBe(dataset.id)
   })
 
-  test('generate id if no dataset name and id provided', () => {
+  it('generate id if no dataset name and id provided', () => {
     let control = new FormBaseControl()
     control.connectedCallback()
     expect(control.dataset.id).not.toBeUndefined()
     expect(control.dataset.name).toBe(control.dataset.id)
   })
 
-  test('prefix id with dw if start with number', () => {
+  it('prefix id with dw if start with number', () => {
     let control = new FormBaseControl()
     control.dataset.id = '123'
     control.connectedCallback()
     expect(control.dataset.id).toBe('dw123')
   })
 
-  test('render description', () => {
+  it('render description', () => {
     let description = 'This is field description'
     let control = new FormBaseControl()
     control.dataset.description = description
@@ -90,7 +90,7 @@ describe('Unit | Controls | Forms | Base', () => {
     expect(control.querySelector('p').textContent).toBe(description)
   })
 
-  test('does not call _populated if no callback set', () => {
+  it('does not call _populated if no callback set', () => {
     let control = new FormBaseControl()
     let spyPopulated = vi.spyOn(control, '_populated')
     control.populate()
@@ -99,7 +99,7 @@ describe('Unit | Controls | Forms | Base', () => {
   })
 
   describe('when run reportValidity', () => {
-    test('call all child validity', () => {
+    it('call all child validity', () => {
       let control = new FormBaseControl()
       control.append('<input type="text" name="test" required>')
 
@@ -112,7 +112,7 @@ describe('Unit | Controls | Forms | Base', () => {
       expect(spyValidator).toHaveBeenCalled()
     })
 
-    test('return valid if child element does not support validity', () => {
+    it('return valid if child element does not support validity', () => {
       let control = new FormBaseControl()
       control.append('<span></span>')
 
@@ -126,7 +126,7 @@ describe('Unit | Controls | Forms | Base', () => {
       expect(control.reportValidity()).toBeTruthy()
     })
 
-    test('return false if any of children fail validation', () => {
+    it('return false if any of children fail validation', () => {
       let control = new FormBaseControl()
       control.append(`
         <input type="text" name="test" required>
@@ -148,7 +148,7 @@ describe('Unit | Controls | Forms | Base', () => {
       expect(control.reportValidity()).toBe(false)
     })
 
-    test('return true if all children pass validation', () => {
+    it('return true if all children pass validation', () => {
       let control = new FormBaseControl()
       control.append(`
         <input type="text" name="test">

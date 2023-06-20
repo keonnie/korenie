@@ -1,13 +1,13 @@
-import { describe, test, expect } from 'vitest'
+import { describe, it, expect } from 'vitest'
 
 import { FormBaseControl, EmailControl } from '..'
 
 describe('Unit | Controls | Email', () => {
-  test('is instance of BaseControl', () => {
+  it('is instance of BaseControl', () => {
     expect(new EmailControl()).toBeInstanceOf(FormBaseControl)
   })
 
-  test('render input email', () => {
+  it('render input email', () => {
     let dataset = {
       id: 'myid',
       name: 'myemail',
@@ -24,7 +24,7 @@ describe('Unit | Controls | Email', () => {
     expect(emailbox.name).toBe(dataset.name)
   })
 
-  test('make field required if specified', () => {
+  it('make field required if specified', () => {
     let control = new EmailControl()
     control.dataset.required = 'true'
 
@@ -34,7 +34,7 @@ describe('Unit | Controls | Email', () => {
     expect(emailbox.required).toBe(true)
   })
 
-  test('define placeholder when provided', () => {
+  it('define placeholder when provided', () => {
     let dataset = {
       placeholder: 'describe action to do',
     }
@@ -49,7 +49,7 @@ describe('Unit | Controls | Email', () => {
     expect(emailbox.placeholder).toBe(dataset.placeholder)
   })
 
-  test('blank placeholder if not provided', () => {
+  it('blank placeholder if not provided', () => {
     let control = new EmailControl()
 
     control.connectedCallback()
@@ -59,7 +59,7 @@ describe('Unit | Controls | Email', () => {
     expect(emailbox.placeholder).not.toBe('undefined')
   })
 
-  test('inherit from dataset except attribute', () => {
+  it('inherit from dataset except attribute', () => {
     let control = new EmailControl()
     control.dataset.name = 'formname'
     control.dataset.id = 'myid'

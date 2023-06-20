@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, test, vi } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 import {
   mockEvent,
   __mockDispatchEvent,
@@ -13,13 +13,13 @@ describe('Unit | Navigator | Navigation', () => {
   })
 
   describe('when back click', () => {
-    test('dispatch event transition', () => {
+    it('dispatch event transition', () => {
       Navigation.back(mockEvent)
 
       expect(__mockDispatchEvent).toHaveBeenCalled(expect.any(CustomEvent))
     })
 
-    test('fallback to global document if no owner doc', () => {
+    it('fallback to global document if no owner doc', () => {
       let spyQuerySelector = vi.spyOn(globalThis.document, 'querySelector')
       spyQuerySelector.mockImplementation(() => {
         return { dispatchEvent: __mockDispatchEvent }
@@ -33,7 +33,7 @@ describe('Unit | Navigator | Navigation', () => {
   })
 
   describe('> tab title', () => {
-    test('define it', () => {
+    it('define it', () => {
       let titleEl = {
         textContent: '',
       }
@@ -45,7 +45,7 @@ describe('Unit | Navigator | Navigation', () => {
       expect(titleEl.textContent).toBe(appEl.dataset.apptitle)
     })
 
-    test('fallback to global document if no owner doc', () => {
+    it('fallback to global document if no owner doc', () => {
       let spyQuerySelector = vi.spyOn(globalThis.document, 'querySelector')
       spyQuerySelector.mockImplementation(() => {
         return { dispatchEvent: __mockDispatchEvent }

@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, test, vi } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 
 describe('Unit | Navigator', () => {
   let spyListener = vi.spyOn(globalThis, 'addEventListener')
@@ -9,14 +9,14 @@ describe('Unit | Navigator', () => {
     vi.resetModules()
   })
 
-  test('register event listener for back', async () => {
+  it('register event listener for back', async () => {
     const Navigation = await import('./navigation')
     await import('.')
 
     expect(spyListener).toHaveBeenCalledWith('popstate', Navigation.back)
   })
 
-  test('register event listener for setting title', async () => {
+  it('register event listener for setting title', async () => {
     const Navigation = await import('./navigation')
     await import('.')
 

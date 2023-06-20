@@ -1,13 +1,13 @@
-import { describe, expect, test } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import { BaseControl } from '..'
 import TitledParagraphControl from './titled-paragraph'
 
 describe('Unit | Controls | Title Paragraph', () => {
-  test('is instance of BaseControl', () => {
+  it('is instance of BaseControl', () => {
     expect(new TitledParagraphControl()).toBeInstanceOf(BaseControl)
   })
 
-  test('display title and paragraph', () => {
+  it('display title and paragraph', () => {
     let control = new TitledParagraphControl()
     control.dataset.header = 'First header'
     control.dataset.value = 'My long paragraph'

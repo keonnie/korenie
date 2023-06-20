@@ -1,4 +1,4 @@
-import { expect, describe, test } from 'vitest'
+import { expect, describe, it } from 'vitest'
 import { BaseControl } from '..'
 
 /**
@@ -24,29 +24,29 @@ class ControlWithAttributes extends SampleControl {
 }
 
 describe('Unit | Controls | Base', () => {
-  test('is instance of HTMLElement', () => {
+  it('is instance of HTMLElement', () => {
     expect(new BaseControl()).toBeInstanceOf(HTMLElement)
   })
 
-  test('has tagName dasherized base on class name', () => {
+  it('has tagName dasherized base on class name', () => {
     expect(BaseControl.tagName).toBe('CONTROL-BASE')
     expect(new BaseControl().tagName).toBe('CONTROL-BASE')
   })
 
-  test('has blank body when no view defined', () => {
+  it('has blank body when no view defined', () => {
     let control = new BaseControl()
     control.connectedCallback()
     expect(control.innerHTML).toBe('')
   })
 
-  test('display the view content without variable', () => {
+  it('display the view content without variable', () => {
     let control = new SampleControl()
     control._view = '<div>hello</div>'
     control.connectedCallback()
     expect(control.innerHTML).toBe('<div>hello</div>')
   })
 
-  test('parse templates variable', () => {
+  it('parse templates variable', () => {
     let control = new ControlWithAttributes()
     control._view = '<div>hello ${attribute1} ${attribute2}</div>'
     control.connectedCallback()

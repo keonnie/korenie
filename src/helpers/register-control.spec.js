@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { registerControl } from './register-control'
 
 /**
@@ -16,31 +16,31 @@ describe('Unit | Helpers | Register Control', () => {
     vi.resetAllMocks()
   })
 
-  test('require class to be defined', () => {
+  it('require class to be defined', () => {
     expect(() => {
       registerControl()
     }).toThrow('`klass` is required')
   })
 
-  test('require control to be an instance of HTMLElement', () => {
+  it('require control to be an instance of HTMLElement', () => {
     expect(() => {
       registerControl('abc')
     }).toThrow('Control must be a descendant of HTMLElement')
   })
 
-  test('register control base on class name', () => {
+  it('register control base on class name', () => {
     this.spyGet.mockReturnValue(undefined)
     registerControl(TControl)
     expect(this.spyDefine).toHaveBeenLastCalledWith('control-t', TControl)
   })
 
-  test('does not attempt to register twice', () => {
+  it('does not attempt to register twice', () => {
     this.spyGet.mockReturnValue(TControl)
     registerControl(TControl)
     expect(this.spyDefine).not.toHaveBeenCalled()
   })
 
-  test('allow defining control name', () => {
+  it('allow defining control name', () => {
     this.spyGet.mockReturnValue(undefined)
     let customName = 'custom-name'
 

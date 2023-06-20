@@ -1,12 +1,12 @@
-import { describe, expect, test } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import { FormBaseControl, CheckboxControl } from '..'
 
 describe('Unit | Controls | Forms | Checkbox', () => {
-  test('is instance of FormControl', () => {
+  it('is instance of FormControl', () => {
     expect(new CheckboxControl()).toBeInstanceOf(FormBaseControl)
   })
 
-  test('display checkbox with label', () => {
+  it('display checkbox with label', () => {
     let control = new CheckboxControl()
     control.dataset.label = 'label'
     control.dataset.value = 'value'
@@ -23,7 +23,7 @@ describe('Unit | Controls | Forms | Checkbox', () => {
     expect(checkbox.value).toBe(control.dataset.value)
   })
 
-  test('tied label to checkbox when id defined', () => {
+  it('tied label to checkbox when id defined', () => {
     let control = new CheckboxControl()
     control.id = 'mychx'
     control.dataset.label = 'label'
@@ -37,7 +37,7 @@ describe('Unit | Controls | Forms | Checkbox', () => {
     expect(label.htmlFor).toBe('chx-mychx')
   })
 
-  test('tied label to checkbox when id not defined', () => {
+  it('tied label to checkbox when id not defined', () => {
     let control = new CheckboxControl()
     control.dataset.label = 'label'
     control.dataset.value = 'value'
@@ -50,7 +50,7 @@ describe('Unit | Controls | Forms | Checkbox', () => {
     expect(label.htmlFor).toBe(checkbox.id)
   })
 
-  test('prevent label display if dataset label not defined', () => {
+  it('prevent label display if dataset label not defined', () => {
     let control = new CheckboxControl()
     control.dataset.value = 'value'
     control.connectedCallback()

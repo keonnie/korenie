@@ -1,4 +1,4 @@
-import { expect, describe, test, beforeAll, vi, beforeEach } from 'vitest'
+import { expect, describe, it, beforeAll, vi, beforeEach } from 'vitest'
 import { LinkTo } from '..'
 
 describe('Unit | Controls | LinkTo', () => {
@@ -7,12 +7,12 @@ describe('Unit | Controls | LinkTo', () => {
     globalThis.location.href = 'http://myapp.com'
   })
 
-  test('instance of HTMLElement', () => {
+  it('instance of HTMLElement', () => {
     let control = new LinkTo()
     expect(control).toBeInstanceOf(HTMLElement)
   })
 
-  test('raise error if not routing to application', () => {
+  it('raise error if not routing to application', () => {
     let anchor = new LinkTo()
     anchor.setAttribute('route', 'http://notadomain.com')
 
@@ -21,7 +21,7 @@ describe('Unit | Controls | LinkTo', () => {
     )
   })
 
-  test('does not bind click if route undefined', () => {
+  it('does not bind click if route undefined', () => {
     let anchor = new LinkTo()
     let spyListener = vi.spyOn(anchor, 'addEventListener')
 
@@ -29,7 +29,7 @@ describe('Unit | Controls | LinkTo', () => {
     expect(spyListener).not.toHaveBeenCalledWith('click', expect.any(Function))
   })
 
-  test('not binding click if route blank', () => {
+  it('not binding click if route blank', () => {
     let anchor = new LinkTo()
     anchor.setAttribute('route', '')
     let spyListener = vi.spyOn(anchor, 'addEventListener')
@@ -44,7 +44,7 @@ describe('Unit | Controls | LinkTo', () => {
       this.anchor.setAttribute('route', '/about')
     })
 
-    test('add the URL to history', () => {
+    it('add the URL to history', () => {
       const spy = vi.spyOn(globalThis.history, 'pushState')
       let new_url = globalThis.location.href + 'about'
 
@@ -55,7 +55,7 @@ describe('Unit | Controls | LinkTo', () => {
       expect(spy).toBeCalledWith({}, '', new_url)
     })
 
-    test('notify listeners', () => {
+    it('notify listeners', () => {
       const evtSpy = vi.spyOn(this.anchor, 'dispatchEvent')
       this.anchor.connectedCallback()
       this.anchor.click()

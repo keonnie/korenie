@@ -1,20 +1,20 @@
-import { describe, expect, test, vi } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 
 import { FormBaseControl, CheckboxListControl } from '..'
 
 describe('Unit | Controls | Forms | CheckboxList', () => {
-  test('is instance of FormControls', () => {
+  it('is instance of FormControls', () => {
     expect(new CheckboxListControl()).toBeInstanceOf(FormBaseControl)
   })
 
-  test('skip if not data bound', () => {
+  it('skip if not data bound', () => {
     let list = new CheckboxListControl()
     list.onPopulate = vi.fn().mockReturnValue(null)
 
     expect(() => list.connectedCallback()).not.toThrow(TypeError)
   })
 
-  test('populate checkboxes', () => {
+  it('populate checkboxes', () => {
     let checkboxes = [
       {
         label: 'testlabel1',

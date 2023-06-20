@@ -4,7 +4,7 @@ import {
   beforeEach,
   describe,
   expect,
-  test,
+  it,
   vi,
 } from 'vitest'
 
@@ -25,13 +25,13 @@ describe('Unit | Router', () => {
     vi.resetModules()
   })
 
-  test('return URL type', () => {
+  it('return URL type', () => {
     let url = Router.parseURL('/about')
     expect(url).toBeInstanceOf(URL)
   })
 
   describe('> parseURL', () => {
-    test('append the domain if not exist', () => {
+    it('append the domain if not exist', () => {
       globalThis.location.href = 'http://mydomain.com'
       let url = Router.parseURL('/about')
       expect(url.protocol).toBe('http:')
@@ -39,21 +39,21 @@ describe('Unit | Router', () => {
       expect(url.href).toBe('http://mydomain.com/about')
     })
 
-    test('do not change URL if domain provided', () => {
+    it('do not change URL if domain provided', () => {
       let url = Router.parseURL('http://mydomain.com/help')
       expect(url.protocol).toBe('http:')
       expect(url.host).toBe('mydomain.com')
       expect(url.href).toBe('http://mydomain.com/help')
     })
 
-    test('return home domain URL if nothing provided', () => {
+    it('return home domain URL if nothing provided', () => {
       let url = Router.parseURL()
       expect(url.protocol).toBe('http:')
       expect(url.host).toBe('mydomain.com')
       expect(url.href).toBe('http://mydomain.com/')
     })
 
-    test('parse the port number if provided', () => {
+    it('parse the port number if provided', () => {
       globalThis.location.href = 'http://mydomain.com:5173'
       let url = Router.parseURL('/about')
       expect(url.href).toBe('http://mydomain.com:5173/about')
@@ -61,17 +61,17 @@ describe('Unit | Router', () => {
   })
 
   describe('> route', () => {
-    test('register route without any params', () => {
+    it('register route without any params', () => {
       Router.route('/about', function AboutViewer() {})
       expect(Router.routes.size).toBeGreaterThan(0)
     })
 
-    test('register route with params', () => {
+    it('register route with params', () => {
       Router.route('/test/:id/new', function TestView() {})
       expect(Router.routes.size).toBeGreaterThan(0)
     })
 
-    test('cannot register the same route', () => {
+    it('cannot register the same route', () => {
       let route = '/exist/:id/new'
       Router.route(route, function TestView() {})
       expect(() => {
@@ -79,7 +79,7 @@ describe('Unit | Router', () => {
       }).toThrowError(`Route pattern ${route} already registered.`)
     })
 
-    test('register with mapIndex', () => {
+    it('register with mapIndex', () => {
       let mainPath = '/indexed'
       let pathname = `${mainPath}/index.html`
       Router.route(mainPath, function TestView() {}, { mapIndex: true })
@@ -91,7 +91,7 @@ describe('Unit | Router', () => {
       expect(r).toBeDefined()
     })
 
-    test('throw error if no view or callback registered', () => {
+    it('throw error if no view or callback registered', () => {
       let pathname = '/test'
       expect(() => Router.route(pathname, {})).toThrow(
         `No view or callback registered for route '${pathname}'`,
@@ -110,24 +110,24 @@ describe('Unit | Router', () => {
       registerControl.mockClear()
     })
 
-    test('get current view tag without any attributes', () => {
+    it('get current view tag without any attributes', () => {
       globalThis.location.href = 'http://test.com/products'
       expect(Router.viewer.tag).toBe('<view-product></view-product>')
     })
 
-    test('get the current custom view tag', () => {
+    it('get the current custom view tag', () => {
       globalThis.location.href = 'http://test.com/products/test/new'
       expect(Router.viewer.tag).toBe(
         '<view-product data-type="test"></view-product>',
       )
     })
 
-    test('register custom tag', () => {
+    it('register custom tag', () => {
       Router.viewer.tag
       expect(registerControl).toHaveBeenCalledTimes(1)
     })
 
-    test('get route with index.html', () => {
+    it('get route with index.html', () => {
       globalThis.location.href = 'http://test.com/imagine/index.html'
       Router.route('/imagine', ProductView, { mapIndex: true })
       expect(() => Router.viewer).not.toThrow()
@@ -135,7 +135,7 @@ describe('Unit | Router', () => {
   })
 
   describe('> process', () => {
-    test('callbacks in orders', async () => {
+    it('callbacks in orders', async () => {
       globalThis.location.href = 'http://test.com/authpage'
       let callback = vi.fn()
       Router.route('/authpage', callback, ProductView)
@@ -153,7 +153,7 @@ describe('Unit | Router', () => {
       vi.resetAllMocks()
     })
 
-    test('dispatch transition event from element', () => {
+    it('dispatch transition event from element', () => {
       Router.transitionTo('/about', this.element)
 
       expect(this.element.dispatchEvent).toHaveBeenCalledWith(
@@ -161,7 +161,7 @@ describe('Unit | Router', () => {
       )
     })
 
-    test('add to the url', async () => {
+    it('add to the url', async () => {
       const spy = vi.spyOn(globalThis.history, 'pushState')
       let new_url = globalThis.location.href + 'about'
 

@@ -1,8 +1,8 @@
-import { describe, expect, test } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import { registerControl } from '.'
 
 describe('Unit | Package', () => {
-  test('can import registerControl', () => {
+  it('can import registerControl', () => {
     expect(registerControl).toBeDefined()
   })
 })
