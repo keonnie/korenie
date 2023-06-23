@@ -32,7 +32,7 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "@vitest/coverage-istanbul": "^0.27.1",
+    "@vitest/coverage-istanbul": "^0.32.2",
     "eslint": "^8.31.0",
     "eslint-config-prettier": "^8.6.0",
     "happy-dom": "^8.1.1",
@@ -43,8 +43,8 @@
     "vite": "^4.0.0",
     "vite-plugin-css-injected-by-js": "^2.3.1",
     "vite-plugin-eslint": "^1.8.1",
-    "vitest": "^0.26.2",
-    "vitest-fetch-mock": "^0.2.1"
+    "vitest": "^0.32.2",
+    "vitest-fetch-mock": "^0.2.2"
   },
   "resolutions": {
     "semver": "^7.5.3"
