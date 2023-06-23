@@ -1,4 +1,9 @@
-import { ButtonControl, LinkTo, TitledParagraphControl } from './controls'
+import {
+  ButtonControl,
+  LinkTo,
+  TeaserControl,
+  TitledParagraphControl,
+} from './controls'
 import {
   CheckboxControl,
   CheckboxListControl,
@@ -19,6 +24,7 @@ import 'urlpattern-polyfill'
 // Register general controls
 registerControl(ButtonControl)
 registerControl(LinkTo, 'link-to')
+registerControl(TeaserControl)
 registerControl(TitledParagraphControl)
 // Register form controls
 registerControl(CheckboxControl)

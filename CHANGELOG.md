@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Added
+
+- A `teaser` control for collapsing/expanding text with `Read more` and `Show less` functionality
+
 ## [0.1.0] - 2023-02-26
 
 ### Added
