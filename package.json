@@ -45,5 +45,8 @@
     "vite-plugin-eslint": "^1.8.1",
     "vitest": "^0.26.2",
     "vitest-fetch-mock": "^0.2.1"
+  },
+  "resolutions": {
+    "semver": "^7.5.3"
   }
 }
