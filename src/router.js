@@ -106,20 +106,15 @@ class Router {
     // Remove last arguments if it's not a function
     // which will mean it's options
     let callbacks = opts ? args.slice(0, args.length - 1) : args
+    const { mapIndex = false } = opts || {}
 
     if (!callbacks.length)
       throw new Error(`No view or callback registered for route '${pathname}'`)
 
-    this.#routes.set(new URLPattern({ pathname }), callbacks)
-
-    if ((opts || {}).mapIndex === true) {
-      this.#routes.set(
-        new URLPattern({
-          pathname: `${pathname}/(index.html)?`,
-        }),
-        callbacks,
-      )
-    }
+    this.#routes.set(
+      new URLPattern({ pathname: this.#pathnamePattern(pathname, mapIndex) }),
+      callbacks,
+    )
   }
 
   /**
@@ -160,7 +155,21 @@ class Router {
    * @param {String} pathname
    */
   #has(pathname) {
-    return Array.from(this.#routes.keys()).some((p) => p.pathname == pathname)
+    return Array.from(this.#routes.keys()).some((p) => p.test({ pathname }))
+  }
+
+  /**
+   * Generate path name regex pattern
+   * for the specified pathname
+   *
+   * @param {String} pathname
+   * @param {Boolean} mapIndex
+   * @returns {String} regex pattern
+   */
+  #pathnamePattern(pathname, mapIndex) {
+    if (pathname.endsWith('/')) pathname = pathname.slice(0, -1)
+
+    return `${pathname}{/}?${mapIndex ? '{/index.html}?' : ''}`
   }
 }
 

@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Changed
+
+- `Router` to support routes with and without trailing slash
+
 ## [0.2.0] - 2023-06-24
 
 ### Added

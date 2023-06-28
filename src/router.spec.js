@@ -5,6 +5,7 @@ import {
   describe,
   expect,
   it,
+  test,
   vi,
 } from 'vitest'
 
@@ -141,6 +142,32 @@ describe('Unit | Router', () => {
       Router.route('/authpage', callback, ProductView)
       await Router.process()
       expect(callback).toHaveBeenCalled()
+    })
+
+    describe('with implicit routing', () => {
+      const noEndSlash = 'noendslash'
+      const endSlash = 'endslash'
+      const callback = vi.fn()
+
+      beforeAll(() => {
+        Router.route(`/${noEndSlash}`, callback)
+        Router.route(`/${endSlash}/`, callback)
+      })
+
+      afterEach(() => {
+        callback.mockClear()
+      })
+
+      test.each([
+        [noEndSlash],
+        [`${noEndSlash}/`],
+        [endSlash],
+        [`${endSlash}/`],
+      ])('process route %s', async (pathname) => {
+        globalThis.location.href = `http://test.com/${pathname}`
+        await Router.process()
+        expect(callback).toHaveBeenCalled()
+      })
     })
   })
 
